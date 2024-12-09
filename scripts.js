@@ -22,14 +22,14 @@ function appendMessage(sender, message) {
 }
 
 async function getChatbotResponse(message) {
-    const response = await fetch('https://api-inference.huggingface.co/models/distilbert-base-uncased', {
+    const response = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill', {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer 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',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ inputs: message })
+        body: JSON.stringify({ inputs: { text: message } })
     });
     const data = await response.json();
-    return data[0]?.generated_text || "Sorry, I didn't understand that.";
+    return data.generated_text || "Sorry, I didn't understand that.";
 }
