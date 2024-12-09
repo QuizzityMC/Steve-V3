@@ -38,7 +38,9 @@ async function getChatbotResponse(message) {
 
         const data = await response.json();
         console.log('API Response:', data);
-        return data.generated_text || "Sorry, I didn't understand that.";
+        
+        // Access the generated text properly
+        return data.conversation.generated_text || "Sorry, I didn't understand that.";
     } catch (error) {
         console.error('Error fetching response:', error);
         return "Sorry, something went wrong.";
